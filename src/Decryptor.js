@@ -9,6 +9,9 @@ module.exports = async (key) => {
 
     return Object.freeze({
         decrypt: (ciphertext, nonce) => {
+            if(!ciphertext || !nonce) {
+                throw 'either of the arguments is undefined';
+            }
             return nacl.crypto_secretbox_open_easy(ciphertext, nonce, key);
         }
     });
